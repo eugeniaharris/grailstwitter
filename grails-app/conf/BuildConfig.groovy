@@ -17,7 +17,7 @@ grails.project.dependency.resolution = {
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
-        //mavenCentral()
+        mavenCentral()
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -27,5 +27,15 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.5'
+
+        // Add drivers for geb, from Tomas Lin post:
+        // http://fbflex.wordpress.com/2010/08/25/geb-and-grails-tips-tricks-and-gotchas/
+        test 'org.seleniumhq.selenium:selenium-firefox-driver:latest.release'
+        test 'org.seleniumhq.selenium:selenium-chrome-driver:latest.release'
+        test 'org.seleniumhq.selenium:selenium-ie-driver:latest.release'
+        test('org.seleniumhq.selenium:selenium-htmlunit-driver:latest.release') {
+            exclude 'xml-apis'
+        }
+
     }
 }
