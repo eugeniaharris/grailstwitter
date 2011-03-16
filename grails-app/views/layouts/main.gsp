@@ -15,7 +15,10 @@
             </div>
             <div id="grailsLogo"><a href="http://grails.org"><img src="${resource(dir:'images',file:'grails_logo.png')}" alt="Grails" border="0" /></a></div>
             <sec:ifLoggedIn>
-                <strong>Welcome <sec:username/></strong><br/><br/>
+                <strong id="welcome">Welcome <sec:username/></strong>
+                <br/>
+                (Not <sec:username/>?  <g:link controller="logout" name="logout">Sign in as a different user</g:link>)
+                <br/><br/>
             </sec:ifLoggedIn>
             <g:layoutBody />
         </div>
