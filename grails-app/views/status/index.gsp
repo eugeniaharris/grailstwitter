@@ -9,6 +9,7 @@
     <div class="searchForm">
         <g:form controller="searchable">
             <g:textField name="q" value=""/>
+            <g:submitButton name="Search" value="Search"/>
         </g:form>
     </div>
 
