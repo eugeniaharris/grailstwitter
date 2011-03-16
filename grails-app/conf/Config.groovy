@@ -99,3 +99,14 @@ grails.gemfire.regions = {
         entryTimeToLive = expirationAttributes(120, DESTROY)
     }
 }
+
+// Workaround for socket exception on startup (on kubuntu):
+// bad argument for IP_MULTICAST_IF: address not bound to any interface
+// May in turn lead to problems like this on reload:
+// Caused by: java.lang.IllegalArgumentException: a beanFactoryReference already
+// exists for key myServer
+//grails.gemfire.servers = {
+//    myServer {
+//        properties = ['bind-address': '127.0.0.1']
+//    }
+//}
