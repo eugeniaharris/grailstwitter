@@ -43,7 +43,32 @@ class StatusService {
         }
     }
 
-    private lookupPerson() {
-        Person.get(springSecurityService.principal.id)
+    Person lookupPerson() {
+        springSecurityService.currentUser as Person
+    }
+
+    List<String> currentUserTimeline() {
+        def messages = twitterCache[springSecurityService.principal.username]
+        if (!messages) {
+            log.debug "No messages found in cache for user <${springSecurityService.principal.username}>. Querying database..."
+            def per = lookupPerson()
+            messages = Status.withCriteria {
+                or {
+                    author {
+                        eq 'username', per.username
+                    }
+                    if (per.followed) {
+                        inList 'author', per.followed
+                    }
+                }
+                maxResults 10
+                order 'dateCreated', 'desc'
+            }
+            twitterCache[springSecurityService.principal.username] = messages
+        }
+        else {
+            log.debug "Status messages loaded from cache for user <${springSecurityService.principal.username}>."
+        }
+        messages
     }
 }
